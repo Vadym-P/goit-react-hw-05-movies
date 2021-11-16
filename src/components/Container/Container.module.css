@@ -1,5 +1,5 @@
 .container {
-  padding: 10px 50px;
-  border-bottom: 5px solid rgb(214, 214, 214);
-  border-radius: 18px;
+  position: relative;
+  padding-left: 50px;
+  padding-right: 50px;
 }

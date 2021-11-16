@@ -1,0 +1,49 @@
+.img {
+  width: 200px;
+}
+
+.infoContainer {
+  display: flex;
+  /* flex-wrap: nowrap; */
+  /* align-items: center; */
+}
+
+.descContainer {
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.genre {
+  display: flex;
+}
+
+.genreTitle {
+  display: inline-block;
+}
+
+.genreTitle:not(:last-child) {
+  margin-right: 10px;
+}
+
+.btn {
+  margin-bottom: 5px;
+  border-color: rgb(216, 214, 214);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.list {
+  padding-left: 40px;
+}
+
+.itemLink {
+  list-style: disc;
+  margin-bottom: 5px;
+}
+
+.textWrap {
+  display: block;
+  margin-bottom: 15px;
+}

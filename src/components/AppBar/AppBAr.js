@@ -1,9 +1,9 @@
 import Navigation from '../Navigation';
-import s from './AppBar.modeule.css';
+import s from './AppBar.module.css';
 
 export default function AppBar() {
   return (
-    <header className={s.header__bar}>
+    <header className={s.header}>
       <Navigation />
     </header>
   );

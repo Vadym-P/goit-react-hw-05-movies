@@ -1,3 +1,13 @@
+.list {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-left: 15px;
+}
+
+.item:not(:last-child) {
+  margin-right: 15px;
+}
+
 .link {
   display: inline-block;
   text-decoration: none;
@@ -9,9 +19,9 @@
   cursor: pointer;
 }
 
-.link:not(:last-child) {
+/* .link:not(:last-child) {
   margin-right: 10px;
-}
+} */
 
 .activeLink {
   composes: link;
