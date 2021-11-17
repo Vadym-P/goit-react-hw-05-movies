@@ -4,6 +4,10 @@
   margin-bottom: 15px;
 }
 
+.list {
+  padding-top: 10px;
+}
+
 .item {
   margin-bottom: 40px;
   list-style: disc;

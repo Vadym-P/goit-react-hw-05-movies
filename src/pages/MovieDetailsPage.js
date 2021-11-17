@@ -1,23 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   NavLink,
-  Outlet,
+  Routes,
+  Route,
   useParams,
   useLocation,
   useNavigate,
 } from 'react-router-dom';
 import WrapperContainer from '../components/WrapperContainer';
 import * as movieAPI from '../services/moviedb-API';
+import Loader from '../components/Loader';
 import s from './StylesPages/MovieDetailsPage.module.css';
+const Cast = lazy(() => import('./Cast.js' /* webpackChunkName: "cast" */));
+const Reviews = lazy(() =>
+  import('./Reviews.js' /* webpackChunkName: "reviews" */),
+);
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
+  const [status, setStatus] = useState('idle');
 
   useEffect(() => {
+    setStatus('pending');
     movieAPI.fetchMovieId(movieId).then(setMovie);
+    setStatus('resolved');
   }, [movieId]);
 
   const onGoBack = () => {
@@ -34,6 +43,7 @@ export default function MovieDetailsPage() {
 
   return (
     <WrapperContainer>
+      {status === 'pending' && <Loader />}
       <button type="button" className={s.btn} onClick={onGoBack}>
         Go back
       </button>
@@ -60,8 +70,8 @@ export default function MovieDetailsPage() {
           </div>
         </div>
       )}
-      <hr />
-      <div>
+
+      <div className={s.container}>
         <span className={s.textWrap}>Additional information</span>
         <ul className={s.list}>
           <li className={s.itemLink}>
@@ -72,9 +82,13 @@ export default function MovieDetailsPage() {
           </li>
         </ul>
       </div>
-      <hr />
 
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/cast" element={<Cast />} />
+          <Route path="/reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
     </WrapperContainer>
   );
 }

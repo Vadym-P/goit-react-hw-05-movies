@@ -4,6 +4,7 @@
 
 .infoContainer {
   display: flex;
+  margin-bottom: 20px;
   /* flex-wrap: nowrap; */
   /* align-items: center; */
 }
@@ -36,6 +37,7 @@
 
 .list {
   padding-left: 40px;
+  padding-bottom: 10px;
 }
 
 .itemLink {
@@ -46,4 +48,11 @@
 .textWrap {
   display: block;
   margin-bottom: 15px;
+  padding-top: 10px;
+}
+
+.container {
+  border-top: 5px solid rgb(214, 214, 214);
+  border-bottom: 5px solid rgb(214, 214, 214);
+  border-radius: 12px;
 }

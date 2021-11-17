@@ -1,21 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import WrapperContainer from '../components/WrapperContainer';
 import PageTitle from '../components/PageTitle';
 import * as movieAPI from '../services/moviedb-API';
 import s from './StylesPages/HomePage.module.css';
 import defaultImg from '../defaultImage/default.png';
+import Loader from '../components/Loader';
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
+  const [status, setStatus] = useState('idle');
 
   useEffect(() => {
+    setStatus('pending');
     movieAPI.fetchTrendMovies().then(setMovies);
+    setStatus('resolved');
   }, []);
 
   return (
     <WrapperContainer>
       <PageTitle text="Trending today" />
+
+      {status === 'pending' && <Loader />}
 
       {movies && (
         <ul className={s.list}>
@@ -45,3 +52,12 @@ export default function HomePage() {
     </WrapperContainer>
   );
 }
+
+HomePage.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      movie: PropTypes.string.isRequired,
+    }),
+  ),
+  status: PropTypes.string,
+};

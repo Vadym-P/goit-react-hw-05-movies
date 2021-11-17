@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import WrapperContainer from '../components/WrapperContainer';
 import * as movieAPI from '../services/moviedb-API';
 import defaultImage from '../defaultImage/defaultIcon.jpg';
@@ -47,3 +48,12 @@ export default function Cast() {
     </WrapperContainer>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.number,
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      actor: PropTypes.string.isRequired,
+    }),
+  ),
+};

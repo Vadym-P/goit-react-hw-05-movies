@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as movieAPI from '../services/moviedb-API';
 import s from './StylesPages/Reviews.module.css';
 
@@ -15,7 +16,7 @@ export default function Reviews() {
     <>
       <div className={s.container}>
         {reviews && reviews.total_results !== 0 ? (
-          <ul>
+          <ul className={s.list}>
             {reviews.results.map(review => (
               <li key={review.id} className={s.item}>
                 <span className={s.author}>Author: {review.author}</span>
@@ -30,3 +31,18 @@ export default function Reviews() {
     </>
   );
 }
+
+Reviews.propTypes = {
+  movieId: PropTypes.number,
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          author: PropTypes.string.isRequired,
+          content: PropTypes.string,
+        }),
+      ),
+    }),
+  ),
+};
